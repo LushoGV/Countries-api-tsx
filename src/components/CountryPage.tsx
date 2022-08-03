@@ -13,6 +13,8 @@ const CountryPage = () => {
 
   useEffect(() => {
     setCountryData(data);
+    console.log(Object.entries(data.currencies)[0])
+
   }, [data]);
 
   useEffect(() => {
@@ -125,7 +127,7 @@ const CountryPage = () => {
                       {countryData.tld[0]}
                     </span>
                   </span>
-                  <span className="py-1 text-sm md:text-base">
+                   <span className="py-1 text-sm md:text-base">
                     <label
                       htmlFor="Currencies"
                       className="font-semibold dark:font-medium pr-1"
@@ -133,7 +135,7 @@ const CountryPage = () => {
                       Currencies:
                     </label>
                     <span className="dark:text-gray-300">
-                      {Object.entries(data.currencies)[0][1].name}
+                       {Object.entries(data.currencies)[0][0]} 
                     </span>
                   </span>
                   <span className="flex py-1 text-sm md:text-base">

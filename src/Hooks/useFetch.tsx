@@ -23,7 +23,19 @@ export const useFetch = () => {
 };
 
 export const useFetchCountry = (param: string | undefined) :{data:Country, error:boolean} => {
-    const [data, setData] = useState<Country>();
+    const [data, setData] = useState<Country>({
+      name: {common: '', official: ''},
+      population: 0,
+      region: '',
+      subregion: '',
+      capital: [],
+      flags: {png:'', svg:''},
+      cca3: '',
+      tld: [],
+      languages: [],
+      borders: [],
+      currencies: []
+    });
     const [error, setError] = useState<boolean>(false)
     let api = `https://restcountries.com/v3.1/name/${param}`;
   
