@@ -6,11 +6,11 @@ const Card = (props: CardProps) => {
 
   return (
     <div
-      className="bg-white dark:bg-slate-700 dark:border-slate-700 text-black dark:text-white shadow-sm m-2 flex flex-col rounded-md border-2 cursor-pointer overflow-hidden hover:shadow-lg"
+      className="bg-white w-full dark:bg-slate-700 dark:border-slate-700 text-black dark:text-white shadow-sm m-2 flex flex-col rounded-md border-2 cursor-pointer overflow-hidden hover:shadow-lg"
       onClick={() => navigate(`/${props.name}`)}
     >
       <header className="flex flex-col">
-        <img src={props.flag} alt="" className="h-44 object-fill" />
+        <img src={props.flag} alt="" className="h-44 w-full" />
       </header>
       <section className="p-5">
         <h2 className="mb-2 font-bold text-xl">{props.name}</h2>

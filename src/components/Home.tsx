@@ -7,18 +7,21 @@ import LoaderPage from "./LoaderPage";
 const Home = () => {
   const [countries, setCountries] = useState<Country[]>([]);
   const [regionsActive, setRegionsActive] = useState<boolean>(false);
+  const [loader, setLoader] = useState<boolean>(true)
   const [regionSelected, setRegionSelected] = useState<number>(0);
   const data = useFetch();
   const Regions = ["Africa", "America", "Asia", "Europe", "Oceania"];
 
   useEffect(() => {
+    setLoader(false)
     setCountries(data);
   }, [data]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setLoader(true)
     if (e.target.value) {
       let newData = countries.filter((element: Country) =>
-        element.name.common.toLowerCase().startsWith(e.target.value)
+        element.name.common.toLowerCase().startsWith(e.target.value.trim().toLowerCase()) || element.name.common.toLowerCase() === e.target.value.trim().toLowerCase()
       );
       if (regionSelected > 0) {
         let region = Regions[regionSelected - 1];
@@ -40,6 +43,8 @@ const Home = () => {
         setCountries(newData);
       } else setCountries(data);
     }
+
+    setLoader(false)
   };
 
   const ChangeRegion = (newRegion: string, newIndex: number) => {
@@ -101,12 +106,13 @@ const Home = () => {
           </div>
         </div>
       </header>
-      {countries.length ? (
+      {loader && <LoaderPage />}
+      {!loader && countries.length > 0 && (
         <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 md:gap-9 lg:gap-14 py-4 px-5 md:px-0">
           {countries &&
             countries.slice(0, 12).map((element, index) => {
               return (
-                <li key={index}>
+                <li key={index} className="flex">
                   <Card
                     name={element.name.common}
                     population={element.population}
@@ -118,8 +124,6 @@ const Home = () => {
               );
             })}
         </ul>
-      ) : (
-        <LoaderPage />
       )}
     </>
   );
